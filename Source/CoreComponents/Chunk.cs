@@ -48,7 +48,6 @@ namespace Qublock.Core {
             values = chunkData.GetValues();
         }
 
-
     	public bool Contains (ushort blockId)
             => Array.IndexOf(values, blockId) > -1;
 
