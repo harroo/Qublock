@@ -55,12 +55,12 @@ namespace Qublock.Core {
         public Chunk (ChunkLoc loc, Material material, Material fadeMaterial) {
 
             location = loc;
-            position = new Vector3Int(loc.X * 32, loc.Y * 32, loc.Z * 32);
+            position = new GridPos(loc.X * 32, loc.Y * 32, loc.Z * 32);
 
             chunkObject = new GameObject();
-            chunkObject.transform.position = position; //new Vector3(
-            //     position.x, position.y, position.z
-            // );
+            chunkObject.transform.position = new Vector3(
+                position.x, position.y, position.z
+            );
 
             visuMesh = new Mesh();
             collMesh = new Mesh();
@@ -83,7 +83,7 @@ namespace Qublock.Core {
         }
 
         public ChunkLoc location;
-        public Vector3Int position;
+        public GridPos position;
 
         public GameObject chunkObject;
         public GameObject fadeChunkObject;

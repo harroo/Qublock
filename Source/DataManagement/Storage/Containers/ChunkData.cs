@@ -38,9 +38,19 @@ namespace Qublock.Data.Storage.Containers {
             => Array.IndexOf(values, blockId) > -1;
 
         public ChunkData () {}
+
         public ChunkData (ushort[] initValues) {
 
             values = initValues;
+        }
+
+        public ChunkLoc location;
+        public GridPos position;
+
+        public ChunkData (ChunkLoc loc) {
+
+            location = loc;
+            position = new GridPos(loc.X * 32, loc.Y * 32, loc.Z * 32);
         }
     }
 }
