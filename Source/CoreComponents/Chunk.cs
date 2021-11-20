@@ -6,6 +6,7 @@ using System.Threading;
 using System.Collections.Generic;
 
 using Qublock.Data.Storage.Structures;
+using Qublock.Data.Storage.Containers;
 using Qublock.Data.Blocks;
 
 namespace Qublock.Core {
@@ -38,6 +39,15 @@ namespace Qublock.Core {
 
     		valuesSet = true;
     	}
+
+        public ChunkData GetChunkData ()
+            => new ChunkData(values);
+
+        public void SetChunkData (ChunkData chunkData) {
+
+            values = chunkData.GetValues();
+        }
+
 
     	public bool Contains (ushort blockId)
             => Array.IndexOf(values, blockId) > -1;

@@ -36,5 +36,11 @@ namespace Qublock.Data.Storage.Containers {
 
     	public bool Contains (ushort blockId)
             => Array.IndexOf(values, blockId) > -1;
+
+        public ChunkData () {}
+        public ChunkData (ushort[] initValues) {
+
+            values = initValues;
+        }
     }
 }
