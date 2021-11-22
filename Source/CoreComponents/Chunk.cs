@@ -56,7 +56,9 @@ namespace Qublock.Core {
             location = loc;
             position = new GridPos(loc.X * 32, loc.Y * 32, loc.Z * 32);
 
-            chunkObject = new GameObject();
+            // chunkObject = new GameObject();
+            // chunkObject = new GameObject("Chunk " + loc.X + ":" + loc.Y + ":" + loc.Z);
+            chunkObject = new GameObject(loc.X + ":" + loc.Y + ":" + loc.Z);
             chunkObject.transform.position = new Vector3(
                 position.x, position.y, position.z
             );
