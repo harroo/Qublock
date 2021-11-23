@@ -21,7 +21,10 @@ namespace Qublock.ProceduralGeneration {
 
                     int height = Mathf.CeilToInt(
                         // (float)noise.Evaluate(wx * 0.032f, 0, wz * 0.032f) * 8 + 32
-                        SimplexNoise.Noise.Generate(wx * 0.032f, 0, wz * 0.032f) * 8 + 32
+                        (
+                            SimplexNoise.Noise.Generate(wx * 0.032f, 0, wz * 0.032f) +
+                            SimplexNoise.Noise.Generate(wx * 0.016f, 0, wz * 0.016f) 
+                        ) * 8 + 32
                     );
 
                     for (int y = 0; y < 32; ++y) {

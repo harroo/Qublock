@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 using Qublock.Data.Storage.Containers;
 using Qublock.Data.Storage.Structures;
+using Qublock.Data.Serialization;
 using Qublock.ProceduralGeneration;
 
 namespace Qublock.Data.Managers {
@@ -19,8 +20,7 @@ namespace Qublock.Data.Managers {
             => regions.ContainsKey(loc);
 
         public static bool RegionExists (RegionLoc loc)
-            => false;
-            // serialization call
+            => Serializer.RegionFileExists(loc);
 
         public static List<RegionLoc> GetRegionLocs ()
             => (from kvp in regions select kvp.Key).ToList();
@@ -34,18 +34,14 @@ namespace Qublock.Data.Managers {
 
         private static RegionData LoadRegion (RegionLoc loc) {
 
-            RegionData region = new RegionData(loc);
-
-            //load region from disk
-
-            return region;
+            return Serializer.Deserialize(loc);
         }
 
         private static void SaveRegion (RegionLoc loc) {
 
             if (!regions.ContainsKey(loc)) return;
 
-            //save region to disk
+            Serializer.Serialize(regions[loc]);
         }
 
         private static void GenerateRegion (RegionData region) {

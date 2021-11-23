@@ -45,7 +45,7 @@ namespace Qublock.Data.Serialization.Compression {
 
                 type = data[i]; count = data[i + 1];
 
-                for (int ii = 0; ii < count; ii++)
+                for (int ii = 0; ii < count; ++ii)
                     decodedData.Add(type);
             }
 
