@@ -23,7 +23,7 @@ namespace Qublock.Data.Serialization {
 
             foreach (var chunk in region.GetChunks()) {
 
-                ushort[] values = RunLengthEncoding.Encode(chunk.GetValues());
+                ushort[] values = CachedRunLengthEncoding.Encode(chunk.GetValues());
                 byte[] chunkBuffer = new byte[values.Length * 2];
                 Buffer.BlockCopy(values, 0, chunkBuffer, 0, chunkBuffer.Length);
 
@@ -65,7 +65,7 @@ namespace Qublock.Data.Serialization {
                 ushort[] values = new ushort[length];
 
                 Buffer.BlockCopy(raw, bufferIndex += 2, values, 0, length);
-                values = RunLengthEncoding.Decode(values);
+                values = CachedRunLengthEncoding.Decode(values);
 
                 chunks[chunkIndex].SetValues(values);
 
