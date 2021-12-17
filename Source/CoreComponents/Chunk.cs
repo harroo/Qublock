@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using Qublock.Data.Storage.Structures;
 using Qublock.Data.Storage.Containers;
 using Qublock.Data.Blocks;
+using Qublock.FloatingOrigin;
 
 namespace Qublock.Core {
 
@@ -59,9 +60,9 @@ namespace Qublock.Core {
             // chunkObject = new GameObject();
             // chunkObject = new GameObject("Chunk " + loc.X + ":" + loc.Y + ":" + loc.Z);
             chunkObject = new GameObject(loc.X + ":" + loc.Y + ":" + loc.Z);
-            chunkObject.transform.position = new Vector3(
+            chunkObject.transform.position = Origin.OffsetToUnity(new Vector3(
                 position.x, position.y, position.z
-            );
+            ));
 
             visuMesh = new Mesh();
             collMesh = new Mesh();
