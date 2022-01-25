@@ -7,6 +7,7 @@ using System.Collections.Generic;
 
 using Qublock.Data.Storage.Structures;
 using Qublock.Data.Storage.Containers;
+using Qublock.Core.ThreadMesher;
 
 namespace Qublock.Core {
 
@@ -53,8 +54,10 @@ namespace Qublock.Core {
 
         public static void RenderChunk (ChunkLoc loc) {
 
-            data.chunks[loc].Render();
-            data.chunks[loc].Asign();
+            // data.chunks[loc].Render();
+            // data.chunks[loc].Asign();
+
+            ThreadMeshing.Enqueue(data.chunks[loc]);
         }
 
         public static void RenderIfVisible (ChunkLoc loc) {
