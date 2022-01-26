@@ -83,6 +83,18 @@ public class FirstPersonEdit : MonoBehaviour {
             RayResult ray;
             if (QublockRay.Fire(transform.position, transform.forward, out ray, range)) {
 
+                Vector3 placePos = Origin.OffsetToUnity(new Vector3(ray.normal.x, ray.normal.y, ray.normal.z));
+                if (placePos == new Vector3(
+                        Mathf.RoundToInt(transform.position.x),
+                        Mathf.RoundToInt(transform.position.y - 0.5f),
+                        Mathf.RoundToInt(transform.position.z))
+                    ||
+                    placePos == new Vector3(
+                        Mathf.RoundToInt(transform.position.x),
+                        Mathf.RoundToInt(transform.position.y + 0.5f),
+                        Mathf.RoundToInt(transform.position.z))
+                ) return;
+
                 World.EditBlock(ray.normal.x, ray.normal.y, ray.normal.z, 4);
             }
         }

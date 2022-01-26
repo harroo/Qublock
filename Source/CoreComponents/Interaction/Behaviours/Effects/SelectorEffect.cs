@@ -24,8 +24,6 @@ public class SelectorEffect : MonoBehaviour {
 
             transform.position = Origin.OffsetToUnity(new Vector3(ray.hit.x, ray.hit.y, ray.hit.z));
 
-            Debug.Log(ray.hit.x+":"+ray.hit.y+":"+ray.hit.z);
-
         } else {
 
             transform.position = new Vector3(0, -169, 0);
