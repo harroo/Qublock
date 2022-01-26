@@ -18,6 +18,7 @@ public class BlockData {
     public virtual bool Erodable => false;
     public virtual bool Flamable => false;
     public virtual bool Solid => true;
+    public virtual bool Selectable => true;
 
     public virtual MeshUVSet UVSet => new MeshUVSet {
         PX_X = 0,
@@ -42,5 +43,10 @@ public class BlockData {
     public virtual void Draw (Chunk chunk, int x, int y, int z) {
 
         BaseMeshing.Block(chunk, x, y, z, UVSet);
+    }
+
+    public virtual void SingleVoxelDraw (Mesh mesh) {
+
+        SVBaseMeshing.Block(mesh, UVSet);
     }
 }

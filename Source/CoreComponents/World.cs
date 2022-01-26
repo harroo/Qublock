@@ -54,9 +54,6 @@ namespace Qublock.Core {
 
         public static void RenderChunk (ChunkLoc loc) {
 
-            // data.chunks[loc].Render();
-            // data.chunks[loc].Asign();
-
             ThreadMeshing.Enqueue(data.chunks[loc]);
         }
 
@@ -74,6 +71,40 @@ namespace Qublock.Core {
                 chunk.Erase();
 
             data.chunks.Clear();
+        }
+
+
+        public static void EditBlock (int x, int y, int z, ushort id) {
+
+            if (data[x, y, z] == id) return;
+
+            // if (id == 0) EffectManager.PlayBreakEffect
+            // else EffectManager.PlayPlaceEffect
+
+            data[x, y, z] = id;
+            RenderBlock(x, y, z);
+        }
+
+        public static void ChangeBlock (int x, int y, int z, ushort id) {
+
+            if (data[x, y, z] == id) return;
+
+            data[x, y, z] = id;
+            RenderBlock(x, y, z);
+        }
+
+        public static void RenderBlock (int x, int y, int z) {
+
+            RenderChunk(ChunkLoc.FromWorldPos(x, y, z));
+
+            if ((x & 0x1F) == 31) RenderChunk(ChunkLoc.FromWorldPos(x + 1, y, z));
+            if ((x & 0x1F) ==  0) RenderChunk(ChunkLoc.FromWorldPos(x - 1, y, z));
+
+            if ((y & 0x1F) == 31) RenderChunk(ChunkLoc.FromWorldPos(x, y + 1, z));
+            if ((y & 0x1F) ==  0) RenderChunk(ChunkLoc.FromWorldPos(x, y - 1, z));
+
+            if ((z & 0x1F) == 31) RenderChunk(ChunkLoc.FromWorldPos(x, y, z + 1));
+            if ((z & 0x1F) ==  0) RenderChunk(ChunkLoc.FromWorldPos(x, y, z - 1));
         }
     }
 }
