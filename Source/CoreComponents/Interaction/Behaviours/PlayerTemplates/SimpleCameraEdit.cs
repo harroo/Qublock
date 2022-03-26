@@ -16,6 +16,16 @@ public class SimpleCameraEdit : MonoBehaviour {
 
         if (Input.GetMouseButtonDown(0)) {
 
+            RaycastHit hit;
+            Ray sray = Camera.main.ScreenPointToRay(new Vector2(Screen.width/2, Screen.height/2));
+            if (Physics.Raycast(sray, out hit, raycastRange)) {
+
+                if (hit.collider.tag == "Entity Block") {
+
+                    hit.collider.GetComponent<EntityBlockBehaviour>().OnLeftClick(); return;
+                }
+            }
+
             RayResult ray;
             if (QublockRay.Fire(transform.position, transform.forward, out ray, raycastRange)) {
 
@@ -24,6 +34,16 @@ public class SimpleCameraEdit : MonoBehaviour {
         }
 
         if (Input.GetMouseButtonDown(1)) {
+
+            RaycastHit hit;
+            Ray sray = Camera.main.ScreenPointToRay(new Vector2(Screen.width/2, Screen.height/2));
+            if (Physics.Raycast(sray, out hit, raycastRange)) {
+
+                if (hit.collider.tag == "Entity Block") {
+
+                    hit.collider.GetComponent<EntityBlockBehaviour>().OnRightClick(); return;
+                }
+            }
 
             RayResult ray;
             if (QublockRay.Fire(transform.position, transform.forward, out ray, raycastRange)) {

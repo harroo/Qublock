@@ -19,6 +19,8 @@ public class FirstPersonEdit : MonoBehaviour {
 
     public BreakingEffect effect;
 
+    private EntityBlockBehaviour hitCache;
+
     private void Update () {
 
         if (Cursor.visible) return;
@@ -54,6 +56,21 @@ public class FirstPersonEdit : MonoBehaviour {
 
         } else if (Input.GetMouseButton(0)) {
 
+            RaycastHit hit;
+            Ray sray = Camera.main.ScreenPointToRay(new Vector2(Screen.width/2, Screen.height/2));
+            if (Physics.Raycast(sray, out hit, range)) {
+
+                if (hit.collider.tag == "Entity Block") {
+
+                    EntityBlockBehaviour behaviour = hit.collider.GetComponent<EntityBlockBehaviour>();
+
+                    if (hitCache == behaviour) return;
+
+                    hitCache = behaviour;
+                    hitCache.OnLeftClick(); return;
+                }
+            }
+
             RayResult ray;
             if (QublockRay.Fire(transform.position, transform.forward, out ray, range)) {
 
@@ -73,12 +90,24 @@ public class FirstPersonEdit : MonoBehaviour {
             }
         }
 
+        if (Input.GetMouseButtonUp(0)) hitCache = null;
+
         interactionDelay -= Time.deltaTime;
         if (Input.GetMouseButtonUp(1)) interactionDelay = 0.0f;
 
         if (Input.GetMouseButton(1) && interactionDelay < 0.0f) {
 
             interactionDelay = 0.32f;
+
+            RaycastHit hit;
+            Ray sray = Camera.main.ScreenPointToRay(new Vector2(Screen.width/2, Screen.height/2));
+            if (Physics.Raycast(sray, out hit, range)) {
+
+                if (hit.collider.tag == "Entity Block") {
+
+                    hit.collider.GetComponent<EntityBlockBehaviour>().OnRightClick(); return;
+                }
+            }
 
             RayResult ray;
             if (QublockRay.Fire(transform.position, transform.forward, out ray, range)) {
@@ -95,7 +124,7 @@ public class FirstPersonEdit : MonoBehaviour {
                         Mathf.RoundToInt(transform.position.z))
                 ) return;
 
-                World.EditBlock(ray.normal.x, ray.normal.y, ray.normal.z, 4);
+                World.EditBlock(ray.normal.x, ray.normal.y, ray.normal.z, 43);
             }
         }
     }

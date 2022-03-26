@@ -73,7 +73,7 @@ namespace Qublock.Core {
             data.chunks.Clear();
         }
 
-
+        // To be called from the local client, when editing blocks. Say by the player.
         public static void EditBlock (int x, int y, int z, ushort id) {
 
             if (data[x, y, z] == id) return;
@@ -83,8 +83,13 @@ namespace Qublock.Core {
 
             data[x, y, z] = id;
             RenderBlock(x, y, z);
+
+            // This should send a message to the server or something of the likes.
+            // However, here we shall simply edit the "server" directly.
+            Qublock.Data.Managers.ChunkManager.SetWorldValue(x, y, z, id);
         }
 
+        // To be called by a Network-Manager of some sort when a block is edited say by another player.
         public static void ChangeBlock (int x, int y, int z, ushort id) {
 
             if (data[x, y, z] == id) return;
