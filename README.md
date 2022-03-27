@@ -52,6 +52,10 @@ The `EntityBlockManager` behaviour should be present in the scene somewhere. It
 should have in its lists a value containing the `BlockId` of the Entity-Block's
 Id, and a Game-Object(prefab) reference.
 
+## Dynamic Lighting
+
+The Dynamic Lighting-System uses real-time lighting.
+
 ## More ..
 
 If you wish to know more, simply read the specific files within [Source/](https://github.com/harroo/Qublock/tree/main/Source/),
