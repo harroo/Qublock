@@ -124,7 +124,7 @@ public class FirstPersonEdit : MonoBehaviour {
                         Mathf.RoundToInt(transform.position.z))
                 ) return;
 
-                World.EditBlock(ray.normal.x, ray.normal.y, ray.normal.z, 4);
+                World.EditBlock(ray.normal.x, ray.normal.y, ray.normal.z, 444);
             }
         }
     }
