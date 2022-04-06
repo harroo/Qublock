@@ -65,6 +65,16 @@ namespace Qublock.ChunkLoading {
 
             } finally { mutex.ReleaseMutex(); }
         }
+
+        public static void ClearCache () {
+
+            mutex.WaitOne(); try {
+
+                fetchQueue.Clear();
+                fetchedChunks.Clear();
+
+            } finally { mutex.ReleaseMutex(); }
+        }
     }
 
     public class FetchedChunk {
